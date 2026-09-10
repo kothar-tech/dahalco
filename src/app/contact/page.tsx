@@ -22,9 +22,24 @@ const details = [
   },
   {
     icon: Mail,
-    label: "Email",
+    label: "Enquiries",
     content: (
-      <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-primary-700">
+      <a
+        href={`mailto:${siteConfig.contact.enquiryEmail}`}
+        className="hover:text-primary-700"
+      >
+        {siteConfig.contact.enquiryEmail}
+      </a>
+    ),
+  },
+  {
+    icon: Mail,
+    label: "Direct",
+    content: (
+      <a
+        href={`mailto:${siteConfig.contact.email}`}
+        className="hover:text-primary-700"
+      >
         {siteConfig.contact.email}
       </a>
     ),
@@ -36,7 +51,8 @@ const details = [
       <>
         {siteConfig.contact.addressLine1}
         <br />
-        {siteConfig.contact.suburb} {siteConfig.contact.state} {siteConfig.contact.postcode}
+        {siteConfig.contact.suburb} {siteConfig.contact.state}{" "}
+        {siteConfig.contact.postcode}
         <span className="mt-1 block text-xs text-slate-400">
           Serving {siteConfig.contact.areaServed}
         </span>
@@ -73,10 +89,13 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="mt-4 text-base leading-relaxed text-slate-600">
-              Have a general question, or not sure which service you need? Send us
-              an enquiry and we&apos;ll get back to you — usually within one business
-              day. Prefer to lock in a specific time instead?{" "}
-              <a href="/book-appointment" className="font-semibold text-primary-700 hover:text-primary-800">
+              Have a general question, or not sure which service you need? Send
+              us an enquiry and we&apos;ll get back to you — usually within one
+              business day. Prefer to lock in a specific time instead?{" "}
+              <a
+                href="/book-appointment"
+                className="font-semibold text-primary-700 hover:text-primary-800"
+              >
                 Request an appointment
               </a>
               .
@@ -90,7 +109,9 @@ export default function ContactPage() {
                   <Icon className="h-4.5 w-4.5" aria-hidden="true" />
                 </span>
                 <div className="text-sm text-slate-600">
-                  <p className="text-sm font-semibold text-slate-900">{label}</p>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {label}
+                  </p>
                   {content}
                 </div>
               </RevealItem>
@@ -98,7 +119,10 @@ export default function ContactPage() {
           </RevealGroup>
         </div>
 
-        <Reveal delay={0.1} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8">
+        <Reveal
+          delay={0.1}
+          className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8"
+        >
           <ContactForm />
         </Reveal>
       </div>

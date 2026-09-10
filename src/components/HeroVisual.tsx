@@ -50,7 +50,9 @@ export default function HeroVisual() {
                 }`}
                 aria-hidden="true"
               />
-              <span className={`text-sm ${step.done ? "text-white" : "text-white/40"}`}>
+              <span
+                className={`text-sm ${step.done ? "text-white" : "text-white/40"}`}
+              >
                 {step.label}
               </span>
             </motion.li>
@@ -78,7 +80,9 @@ export default function HeroVisual() {
         </span>
         <div className="leading-tight">
           <p className="text-xs font-semibold text-slate-900">TPB Registered</p>
-          <p className="text-[11px] text-slate-500">#{siteConfig.credentials.tpbNumber}</p>
+          <p className="text-[11px] text-slate-500">
+            #{siteConfig.credentials.tpbNumber}
+          </p>
         </div>
       </motion.div>
     </motion.div>

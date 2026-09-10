@@ -4,7 +4,7 @@ import { FormEvent, ReactNode, useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
-const TIME_PREFERENCES = ["Morning (9am – 12pm)", "Afternoon (12pm – 5:30pm)", "No preference"];
+const TIME_PREFERENCES = ["Morning (9am – 12pm)", "Afternoon (12pm – 5:00pm)", "No preference"];
 
 type Status = "idle" | "submitting" | "success" | "error";
 

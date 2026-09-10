@@ -2,46 +2,41 @@
 // Central place for every piece of firm-specific content: name, contact
 // details, services, nav links. Update values here rather than hunting
 // through components — most of the site reads from this file.
-//
-// Fields marked "placeholder" below are demo content and must be replaced
-// with the real values before this site goes live.
 // ---------------------------------------------------------------------------
 
 export const siteConfig = {
   name: "Dahal & Co",
-  legalName: "Dahal & Co Pty Ltd",
-  shortTagline: "Registered Tax Agents",
+  legalName: "Dahal & Co",
+  shortTagline: "Accountant & Tax Agent",
   metaDescription:
-    "Dahal & Co are registered tax agents based in Austral, NSW, helping individuals and small businesses across Sydney with tax returns, BAS, tax planning and ATO correspondence.",
+    "Dahal & Co are accountants and registered tax agents based in Gregory Hills, NSW, helping individuals and small businesses across the Sydney region with tax returns, BAS, tax planning and ATO correspondence.",
 
-  // Placeholder domain — replace once a real domain is purchased/pointed here.
-  url: "https://www.dahalandco.com.au",
+  url: "https://www.dahalco.com.au",
   locale: "en-AU",
 
   contact: {
-    // Placeholder contact details — swap these for the real phone/email once available.
-    phoneDisplay: "(02) 0000 0000",
-    phoneHref: "tel:+61200000000",
-    email: "hello@dahalandco.com.au",
-    // Suburb + postcode are real (public TPB register); exact street address is a placeholder.
-    addressLine1: "Suite [Address to be confirmed]",
-    suburb: "Austral",
+    phoneDisplay: "0406 747 733",
+    phoneHref: "tel:+61406747733",
+    email: "uday@dahalco.com.au",
+    enquiryEmail: "tax@dahalco.com.au",
+    addressLine1: "Tenancy 101-104, 39-47 Lasso Road",
+    suburb: "Gregory Hills",
     state: "NSW",
-    postcode: "2179",
-    areaServed:
-      "Austral and the surrounding South-Western Sydney suburbs (Liverpool, Leppington, Edmondson Park, Cecil Hills and nearby areas)",
+    postcode: "2557",
+    areaServed: "Sydney region",
     hours: [
-      { days: "Monday – Friday", time: "9:00am – 5:30pm" },
-      { days: "Saturday", time: "By appointment" },
+      { days: "Monday – Friday", time: "9:00am – 5:00pm" },
+      { days: "Saturday", time: "Closed" },
       { days: "Sunday", time: "Closed" },
     ],
   },
 
   credentials: {
+    abn: "21 160 588 500",
     tpbNumber: "26201224",
     tpbRegisterUrl: "https://www.tpb.gov.au/public-register",
-    // Set these once confirmed — left as placeholders so nothing is overstated.
-    yearsExperience: null as number | null,
+    yearEstablished: 2016,
+    yearsExperience: 10 as number | null,
     professionalBody: null as string | null,
   },
 
@@ -53,11 +48,12 @@ export const siteConfig = {
     { label: "Contact", href: "/contact" },
   ],
 
-  // Placeholder profile URLs — swap for the firm's real social profiles.
   social: [
-    { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/" },
-    { label: "Facebook", icon: "facebook", href: "https://www.facebook.com/" },
-    { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/" },
+    {
+      label: "Google Business Profile",
+      icon: "google",
+      href: "https://share.google/JbpCagFEy3VBmil4r",
+    },
   ],
 
   headerCtas: {
@@ -141,6 +137,16 @@ export const siteConfig = {
       title: "Secure Handling of Your Information",
       description:
         "Your financial documents and personal details are treated as strictly confidential, in line with professional and privacy obligations.",
+    },
+    {
+      title: "Local Sydney Practice",
+      description:
+        "Based in Gregory Hills and serving clients across the Sydney region — easy to reach by phone, email or appointment when you need us.",
+    },
+    {
+      title: "Established Since 2016",
+      description:
+        "Over a decade helping individuals and small businesses stay compliant, organised and confident about their tax position.",
     },
   ],
 } as const;

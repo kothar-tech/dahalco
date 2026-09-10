@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendNotificationEmail } from "@/lib/send-email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -23,18 +24,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
-  // TODO: wire up an email provider (e.g. Resend, Postmark) to forward this
-  // request to the firm's inbox once an API key is available. For now the
-  // submission is validated and logged so the flow can be demoed end-to-end.
-  console.info("[appointment-request]", {
-    name,
-    email,
-    phone,
-    service,
-    preferredDate,
-    preferredTime,
-    notes,
-  });
+  try {
+    await sendNotificationEmail({
+      subject: `Consultation request from ${name.trim()}`,
+      replyTo: email.trim(),
+      heading: "New consultation request",
+      fields: {
+        Name: name,
+        Email: email,
+        Phone: phone,
+        Service: service,
+        "Preferred date": preferredDate,
+        "Preferred time": preferredTime || "No preference",
+        Notes: notes || "—",
+      },
+    });
+  } catch (error) {
+    console.error("[appointment-request]", error);
+    return NextResponse.json(
+      { error: "Could not send your request right now. Please try again or call us." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

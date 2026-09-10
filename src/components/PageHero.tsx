@@ -8,10 +8,18 @@ type PageHeroProps = {
   children?: ReactNode;
 };
 
-export default function PageHero({ eyebrow, title, description, children }: PageHeroProps) {
+export default function PageHero({
+  eyebrow,
+  title,
+  description,
+  children,
+}: PageHeroProps) {
   return (
     <section className="relative overflow-hidden bg-primary-950">
-      <div aria-hidden="true" className="absolute inset-0 text-primary-800/40 bg-dot-grid mask-fade-b" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 text-primary-800/40 bg-dot-grid mask-fade-b"
+      />
       <div
         aria-hidden="true"
         className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary-800/40 blur-3xl"
@@ -32,7 +40,9 @@ export default function PageHero({ eyebrow, title, description, children }: Page
           </h1>
         </Reveal>
         <Reveal delay={0.16}>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-primary-100">{description}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-primary-100">
+            {description}
+          </p>
         </Reveal>
         {children && <Reveal delay={0.24}>{children}</Reveal>}
       </div>

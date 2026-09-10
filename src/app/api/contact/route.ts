@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendNotificationEmail } from "@/lib/send-email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,10 +23,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
-  // TODO: wire up an email provider (e.g. Resend, Postmark) to forward this
-  // enquiry to the firm's inbox once an API key is available. For now the
-  // submission is validated and logged so the form can be demoed end-to-end.
-  console.info("[contact-enquiry]", { name, email, phone, topic, message });
+  try {
+    await sendNotificationEmail({
+      subject: `Website enquiry from ${name.trim()}`,
+      replyTo: email.trim(),
+      heading: "New website enquiry",
+      fields: {
+        Name: name,
+        Email: email,
+        Phone: phone,
+        Topic: topic || "General Enquiry",
+        Message: message,
+      },
+    });
+  } catch (error) {
+    console.error("[contact-enquiry]", error);
+    return NextResponse.json(
+      { error: "Could not send your enquiry right now. Please try again or call us." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

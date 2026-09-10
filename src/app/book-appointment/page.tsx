@@ -15,17 +15,20 @@ const steps = [
   {
     icon: CalendarCheck2,
     title: "1. Send your request",
-    description: "Tell us what you need help with and a date/time that suits you.",
+    description:
+      "Tell us what you need help with and a date/time that suits you.",
   },
   {
     icon: PhoneCall,
     title: "2. We confirm the time",
-    description: "We'll call or email to lock in a time — adjusting it if needed.",
+    description:
+      "We'll call or email to lock in a time — adjusting it if needed.",
   },
   {
     icon: Mail,
     title: "3. Meet with us",
-    description: "In person, by phone, or by video — whichever works best for you.",
+    description:
+      "In person, by phone, or by video — whichever works best for you.",
   },
 ];
 
@@ -45,12 +48,15 @@ export default function BookAppointmentPage() {
             </h1>
             <p className="mt-4 text-base leading-relaxed text-slate-600">
               Fill in a few details below and let us know when suits you. This
-              submits a request — we&apos;ll follow up personally to confirm the exact
-              time.
+              submits a request — we&apos;ll follow up personally to confirm the
+              exact time.
             </p>
           </Reveal>
 
-          <Reveal delay={0.06} className="relative h-44 overflow-hidden rounded-2xl shadow-lg shadow-primary-900/10">
+          <Reveal
+            delay={0.06}
+            className="relative h-44 overflow-hidden rounded-2xl shadow-lg shadow-primary-900/10"
+          >
             <Image
               src="/images/contact-handshake.jpg"
               alt="A professional handshake sealing an agreement"
@@ -74,20 +80,32 @@ export default function BookAppointmentPage() {
             ))}
           </RevealGroup>
 
-          <Reveal delay={0.2} className="rounded-xl bg-slate-50 p-5 text-sm text-slate-600">
+          <Reveal
+            delay={0.2}
+            className="rounded-xl bg-slate-50 p-5 text-sm text-slate-600"
+          >
             Need a faster response, or have a general question first? Call{" "}
-            <a href={siteConfig.contact.phoneHref} className="font-semibold text-primary-700 hover:text-primary-800">
+            <a
+              href={siteConfig.contact.phoneHref}
+              className="font-semibold text-primary-700 hover:text-primary-800"
+            >
               {siteConfig.contact.phoneDisplay}
             </a>{" "}
             or{" "}
-            <a href="/contact" className="font-semibold text-primary-700 hover:text-primary-800">
+            <a
+              href="/contact"
+              className="font-semibold text-primary-700 hover:text-primary-800"
+            >
               send an enquiry
             </a>{" "}
             instead.
           </Reveal>
         </div>
 
-        <Reveal delay={0.1} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8">
+        <Reveal
+          delay={0.1}
+          className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8"
+        >
           <AppointmentForm />
         </Reveal>
       </div>

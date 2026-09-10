@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Target, MessageCircleHeart, Timer, HeartHandshake } from "lucide-react";
+import {
+  Target,
+  MessageCircleHeart,
+  Timer,
+  HeartHandshake,
+} from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import CtaBanner from "@/components/CtaBanner";
 import PageHero from "@/components/PageHero";
@@ -9,7 +14,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "About Our Practice",
-  description: `Learn about ${siteConfig.name}, a registered tax agent based in ${siteConfig.contact.suburb}, ${siteConfig.contact.state} serving individuals and small businesses across South-Western Sydney.`,
+  description: `Learn about ${siteConfig.name}, a registered tax agent based in ${siteConfig.contact.suburb}, ${siteConfig.contact.state} serving individuals and small businesses across the ${siteConfig.contact.areaServed}.`,
   alternates: { canonical: "/about" },
 };
 
@@ -81,7 +86,9 @@ export default function AboutPage() {
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="font-semibold text-slate-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">{description}</p>
+                  <p className="text-sm leading-relaxed text-slate-600">
+                    {description}
+                  </p>
                 </RevealItem>
               ))}
             </RevealGroup>
@@ -94,7 +101,7 @@ export default function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Who We Work With"
-              title="Individuals and small businesses across South-Western Sydney"
+              title={`Individuals and small businesses across the ${siteConfig.contact.areaServed}`}
               description="From a first tax return to ongoing BAS and payroll, we tailor the level of support to what you actually need."
             />
           </Reveal>

@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dahal & Co Website
 
-## Getting Started
+Marketing website for **Dahal & Co** — registered tax agents based in Gregory Hills, NSW. Built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+**Live site:** [dahalco.com.au](https://www.dahalco.com.au)
+
+## Features
+
+- Home, About, Services, Why Choose Us, Contact, and Book Appointment pages
+- Contact and appointment enquiry forms with server-side validation
+- SEO metadata, Open Graph tags, JSON-LD structured data, sitemap, and robots.txt
+- Responsive layout with Framer Motion scroll reveals
+- Centralised site content in a single config file
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [React 19](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/) — animations
+- [Lucide React](https://lucide.dev/) — icons
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 20+
+- npm (or pnpm / yarn / bun)
+
+### Install and run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Other scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # production build
+npm run start   # serve production build
+npm run lint    # run ESLint
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                  # Pages and API routes (App Router)
+│   ├── api/
+│   │   ├── contact/      # Contact form handler
+│   │   └── appointment/  # Appointment request handler
+│   ├── about/
+│   ├── book-appointment/
+│   ├── contact/
+│   ├── services/
+│   ├── why-choose-us/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── sitemap.ts
+│   └── robots.ts
+├── components/           # Reusable UI components
+└── lib/
+    ├── site-config.ts    # Firm name, contact details, services, nav
+    └── service-icons.tsx
+public/
+└── images/               # Static images
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Most firm-specific content lives in `src/lib/site-config.ts` — business name, contact details, services, navigation links, and social profiles. Update that file rather than editing individual pages.
 
-## Deploy on Vercel
+Fields marked as placeholders in that file (phone number, street address, social URLs, etc.) should be replaced before going live.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Forms and API routes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contact and appointment forms POST to:
+
+- `POST /api/contact`
+- `POST /api/appointment`
+
+Both routes validate input and email the submission to `CONTACT_TO_EMAIL` (currently `rbdiwash@gmail.com` for testing).
+
+**Email setup (free):**
+
+1. Copy `.env.example` → `.env.local` (already created locally for testing).
+2. Without a Resend key, submissions use free [FormSubmit](https://formsubmit.co/) — check `rbdiwash@gmail.com` for a one-time activation email and confirm it.
+3. Optional upgrade: create a free [Resend](https://resend.com) API key, set `RESEND_API_KEY` in `.env.local`, and restart `npm run dev`. Free tier allows 100 emails/day.
+
+When the site goes live, change `CONTACT_TO_EMAIL` to `tax@dahalco.com.au` and verify your domain in Resend so you can send from a Dahal & Co address.
+
+## Deployment
+
+The site is a standard Next.js application and can be deployed to [Vercel](https://vercel.com), or any platform that supports Next.js.
+
+```bash
+npm run build
+```
+
+Set any required environment variables in your hosting provider before deploying.
+
+## AI agent files
+
+This repo includes `AGENTS.md` and `CLAUDE.md`. These are **not** part of the website itself — they give AI coding assistants context when working on the project.
+
+| File | Purpose |
+|------|---------|
+| `AGENTS.md` | Auto-generated by Next.js when you run `next dev`. Contains notes for AI agents about this Next.js version. Do not edit manually — `next dev` will regenerate it. |
+| `CLAUDE.md` | A one-line pointer (`@AGENTS.md`) used by Claude Code and Cursor to load the same agent rules. Safe to keep; optional if you do not use AI tools. |
+
+You can commit both files to avoid uncommitted churn when running the dev server.
