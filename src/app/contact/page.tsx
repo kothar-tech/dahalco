@@ -49,10 +49,17 @@ const details = [
     label: "Location",
     content: (
       <>
-        {siteConfig.contact.addressLine1}
-        <br />
-        {siteConfig.contact.suburb} {siteConfig.contact.state}{" "}
-        {siteConfig.contact.postcode}
+        <a
+          href={siteConfig.contact.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary-700"
+        >
+          {siteConfig.contact.addressLine1}
+          <br />
+          {siteConfig.contact.suburb} {siteConfig.contact.state}{" "}
+          {siteConfig.contact.postcode}
+        </a>
         <span className="mt-1 block text-xs text-slate-400">
           Serving {siteConfig.contact.areaServed}
         </span>

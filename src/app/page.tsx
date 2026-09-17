@@ -232,10 +232,15 @@ export default function HomePage() {
                 className="absolute inset-0 bg-gradient-to-t from-primary-950/50 via-transparent to-transparent"
               />
               <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/20 bg-white/95 p-4 backdrop-blur-sm">
-                <p className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                <a
+                  href={siteConfig.contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-primary-700"
+                >
                   <MapPin className="h-4 w-4 text-primary-700" aria-hidden="true" />
                   {siteConfig.contact.addressLine1}, {siteConfig.contact.suburb}
-                </p>
+                </a>
                 <p className="mt-1 text-xs text-slate-500">
                   Serving the {siteConfig.contact.areaServed}
                 </p>

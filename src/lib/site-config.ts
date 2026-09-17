@@ -7,7 +7,7 @@
 export const siteConfig = {
   name: "Dahal & Co",
   legalName: "Dahal & Co",
-  shortTagline: "Accountant & Tax Agent",
+  shortTagline: "Dahal & Co - Accountant & Tax Agent",
   metaDescription:
     "Dahal & Co are accountants and registered tax agents based in Gregory Hills, NSW, helping individuals and small businesses across the Sydney region with tax returns, BAS, tax planning and ATO correspondence.",
 
@@ -24,6 +24,9 @@ export const siteConfig = {
     state: "NSW",
     postcode: "2557",
     areaServed: "Sydney region",
+    // Opens the office location in Google Maps
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Tenancy+101-104%2C+39-47+Lasso+Road%2C+Gregory+Hills+NSW+2557",
     hours: [
       { days: "Monday – Friday", time: "9:00am – 5:00pm" },
       { days: "Saturday", time: "Closed" },
@@ -52,6 +55,11 @@ export const siteConfig = {
     {
       label: "Google Business Profile",
       icon: "google",
+      href: "https://share.google/JbpCagFEy3VBmil4r",
+    },
+    {
+      label: "Facebook",
+      icon: "facebook",
       href: "https://share.google/JbpCagFEy3VBmil4r",
     },
   ],

@@ -135,12 +135,17 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              <span>
+              <a
+                href={siteConfig.contact.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
                 {siteConfig.contact.addressLine1}
                 <br />
                 {siteConfig.contact.suburb}, {siteConfig.contact.state}{" "}
                 {siteConfig.contact.postcode}
-              </span>
+              </a>
             </li>
           </ul>
         </div>
@@ -152,9 +157,22 @@ export default function Footer() {
             © {year} {siteConfig.legalName} · ABN {siteConfig.credentials.abn} ·
             Registered Tax Agent (TPB #{siteConfig.credentials.tpbNumber})
           </p>
-          <Link href="/privacy-policy" className="hover:text-white">
-            Privacy Policy
-          </Link>
+          <div className="flex flex-col gap-1 sm:items-end">
+            <Link href="/privacy-policy" className="hover:text-white">
+              Privacy Policy
+            </Link>
+            <p className="text-xs text-primary-200">
+              Made with care by{" "}
+              <Link
+                href="https://kothartechsolutions.com"
+                className="hover:text-white underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kothar Tech
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

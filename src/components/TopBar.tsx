@@ -1,4 +1,4 @@
-import { Mail, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { GoogleIcon } from "@/components/icons/SocialIcons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -25,9 +25,16 @@ export default function TopBar() {
             <Mail className="h-3.5 w-3.5 text-accent-400" aria-hidden="true" />
             {siteConfig.contact.enquiryEmail}
           </a>
-          <span className="hidden border-l border-white/15 pl-5 text-white/60 xl:inline">
-            {siteConfig.contact.suburb}, {siteConfig.contact.state} · Mon–Fri 9am–5pm
-          </span>
+          <a
+            href={siteConfig.contact.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1.5 border-l border-white/15 pl-5 font-medium text-white/90 transition-colors hover:text-accent-400 xl:inline-flex"
+          >
+            <MapPin className="h-3.5 w-3.5 text-accent-400" aria-hidden="true" />
+            {siteConfig.contact.suburb}, {siteConfig.contact.state} · Mon–Fri
+            9am–5pm
+          </a>
         </div>
 
         {siteConfig.social.length > 0 && (
