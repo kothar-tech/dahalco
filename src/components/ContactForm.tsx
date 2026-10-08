@@ -4,12 +4,13 @@ import { FormEvent, ReactNode, useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 const TOPICS = [
-  "General Enquiry",
-  "Individual Tax Return",
-  "Business Tax & BAS",
-  "Bookkeeping & Payroll",
-  "ATO Correspondence",
-  "Other",
+  "General enquiry",
+  "Personal tax return",
+  "Business tax and BAS",
+  "Bookkeeping and payroll",
+  "An ATO letter or audit",
+  "Starting or changing a business",
+  "Something else",
 ];
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -48,13 +49,11 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-xl border border-primary-100 bg-primary-50 p-10 text-center">
-        <CheckCircle2 className="h-10 w-10 text-primary-700" aria-hidden="true" />
-        <h3 className="font-heading text-xl font-semibold text-slate-900">
-          Thanks — your enquiry is in.
-        </h3>
-        <p className="max-w-sm text-sm text-slate-600">
-          We&apos;ve received your message and will get back to you shortly, usually
+      <div className="flex flex-col items-start gap-3 border border-primary-200 bg-primary-50 p-8">
+        <CheckCircle2 className="h-8 w-8 text-primary-700" aria-hidden="true" />
+        <h3 className="font-heading text-2xl text-ink">Thanks, we&rsquo;ve got it.</h3>
+        <p className="max-w-sm text-ink-soft">
+          Your message is with us. We&rsquo;ll reply by phone or email, usually
           within one business day.
         </p>
         <button
@@ -62,7 +61,7 @@ export default function ContactForm() {
           onClick={() => setStatus("idle")}
           className="btn-outline-dark mt-2"
         >
-          Send another enquiry
+          Send another message
         </button>
       </div>
     );
@@ -71,7 +70,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full name" htmlFor="name">
+        <Field label="Your name" htmlFor="name">
           <input
             id="name"
             name="name"
@@ -104,7 +103,7 @@ export default function ContactForm() {
         />
       </Field>
 
-      <Field label="What's this about?" htmlFor="topic">
+      <Field label="What’s it about?" htmlFor="topic">
         <select id="topic" name="topic" className="input" defaultValue={TOPICS[0]}>
           {TOPICS.map((topic) => (
             <option key={topic} value={topic}>
@@ -121,12 +120,15 @@ export default function ContactForm() {
           required
           rows={5}
           className="input resize-none"
-          placeholder="Tell us a little about what you need help with…"
+          placeholder="A line or two on what you need help with."
         />
       </Field>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div
+          role="alert"
+          className="flex items-center gap-2 border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+        >
           <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
           {errorMessage}
         </div>
@@ -135,10 +137,10 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:self-start"
       >
         {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" />}
-        {status === "submitting" ? "Sending…" : "Send Enquiry"}
+        {status === "submitting" ? "Sending…" : "Send message"}
       </button>
     </form>
   );
@@ -155,7 +157,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-slate-700">
+      <label htmlFor={htmlFor} className="text-sm font-semibold text-ink">
         {label}
       </label>
       {children}

@@ -1,231 +1,157 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import {
-  ShieldCheck,
-  GraduationCap,
-  ExternalLink,
-  Phone,
-  MessageSquare,
-  FileCheck2,
-  Clock3,
-  ArrowRight,
-} from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
-import CtaBanner from "@/components/CtaBanner";
-import PageHero from "@/components/PageHero";
-import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
+import { ExternalLink } from "lucide-react";
+import ClosingCta from "@/components/ClosingCta";
+import PageIntro from "@/components/PageIntro";
+import { CpaPracticeMark } from "@/components/icons/CpaPracticeIcon";
 import { siteConfig } from "@/lib/site-config";
 
+const { contact, credentials } = siteConfig;
+
 export const metadata: Metadata = {
-  title: "Why Choose Us",
-  description: `Credentials and registration details for ${siteConfig.name}, a registered Tax Practitioners Board tax agent serving the ${siteConfig.contact.areaServed}.`,
+  title: "Why choose us",
+  description: `Credentials and registration details for ${siteConfig.name}: a CPA Practice and registered tax agent (TPB ${credentials.tpbNumber}) in ${contact.suburb}, NSW.`,
   alternates: { canonical: "/why-choose-us" },
 };
 
-const workingWithUs = [
+const steps = [
   {
-    icon: MessageSquare,
-    title: "1. Tell us what you need",
-    description:
-      "Send an enquiry or book a consultation — a quick conversation is usually enough to understand your situation.",
+    title: "Tell us what you need.",
+    text: "Ring, send an enquiry or book a time. A short conversation is usually enough for us to see what’s involved.",
   },
   {
-    icon: FileCheck2,
-    title: "2. We prepare the work",
-    description:
-      "Documents are reviewed carefully, questions are asked early, and your return or lodgement is prepared properly.",
+    title: "We do the work.",
+    text: "We go through your documents, ask our questions early, and prepare your return or lodgement properly.",
   },
   {
-    icon: Phone,
-    title: "3. Stay in the loop",
-    description:
-      "You hear from us in plain English — what’s done, what’s next, and what (if anything) you need to action.",
+    title: "You hear from us.",
+    text: "We explain what’s done, what happens next and whether there’s anything you need to do.",
   },
 ];
 
 export default function WhyChooseUsPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Why Choose Us"
-        title="Advice backed by real accountability"
-        description={`Choosing a tax agent is about trust as much as expertise. ${siteConfig.name} is a registered practice based in ${siteConfig.contact.suburb}, helping clients across the ${siteConfig.contact.areaServed} since ${siteConfig.credentials.yearEstablished}.`}
-      />
+      <PageIntro title="Why Dahal & Co." tone="blue">
+        <p>
+          You&rsquo;re handing over your financial records, so it&rsquo;s fair
+          to ask who we are and what stands behind us. Here&rsquo;s the short
+          answer.
+        </p>
+      </PageIntro>
 
-      <Reveal>
-        <div className="container-page relative -mt-10">
-          <div className="relative h-56 overflow-hidden rounded-2xl shadow-xl shadow-primary-900/15 sm:h-72">
-            <Image
-              src="/images/why-handshake.png"
-              alt="Handshake after a successful client consultation"
-              fill
-              sizes="(min-width: 1024px) 1100px, 100vw"
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-950/45 via-transparent to-transparent" />
-          </div>
-        </div>
-      </Reveal>
-
+      {/* Credentials */}
       <section className="section">
-        <div className="container-page flex flex-col gap-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="What Sets Us Apart"
-              title="A practice built around clear advice and direct access"
-              description="No account managers, no ticket queues — just straightforward tax and accounting support from a registered agent."
-            />
-          </Reveal>
-
-          <RevealGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {siteConfig.whyChooseUs.map((item) => (
-              <RevealItem key={item.title} className="card p-6">
-                <h3 className="text-lg font-semibold text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {item.description}
-                </p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      <section className="section bg-slate-50">
-        <div className="container-page grid gap-12 lg:grid-cols-2 lg:items-center">
-          <Reveal className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg shadow-primary-950/10">
+        <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <h2 className="font-heading text-display-md">
+              What stands behind us
+            </h2>
+            <div className="relative mt-8 hidden aspect-[4/3] overflow-hidden lg:block">
               <Image
-                src="/images/why-credentials.png"
-                alt="Accountant carefully reviewing client files and documents"
+                src="/images/contact-handshake.jpg"
+                alt="Two people shaking hands in business clothes"
                 fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="30vw"
                 className="object-cover"
               />
             </div>
-          </Reveal>
+          </div>
 
-          <div className="flex flex-col gap-8">
-            <Reveal>
-              <SectionHeading
-                eyebrow="Registration & Credentials"
-                title="Where our accountability comes from"
-                description="Professional registration and a long-standing local presence are the foundation of how we work."
-              />
-            </Reveal>
-
-            <RevealGroup className="grid gap-5">
-              <RevealItem className="card flex flex-col gap-3 p-6">
-                <span className="icon-badge">
-                  <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+          <dl className="border-t border-ink lg:col-span-8">
+            <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
+              <dt className="font-heading text-xl font-semibold">
+                CPA Practice
+              </dt>
+              <dd className="flex items-start gap-4 text-ink-soft">
+                <CpaPracticeMark className="h-16" />
+                <span>
+                  Our work is held to {credentials.professionalBody}&rsquo;s
+                  professional and ethical standards, on top of what the law
+                  requires of tax agents.
                 </span>
-                <h3 className="font-semibold text-slate-900">
-                  Registered Tax Agent
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  Registered with the Tax Practitioners Board under number{" "}
-                  <span className="font-semibold text-slate-900">
-                    {siteConfig.credentials.tpbNumber}
-                  </span>
-                  . ABN {siteConfig.credentials.abn}.
-                </p>
+              </dd>
+            </div>
+
+            <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
+              <dt className="font-heading text-xl font-semibold">
+                Registered tax agent
+              </dt>
+              <dd className="text-ink-soft">
+                Tax Practitioners Board number{" "}
+                <span className="font-semibold tabular text-ink">
+                  {credentials.tpbNumber}
+                </span>
+                .{" "}
                 <a
-                  href={siteConfig.credentials.tpbRegisterUrl}
+                  href={credentials.tpbRegisterUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary-700 hover:text-primary-800"
+                  className="text-link inline-flex items-center gap-1"
                 >
-                  Verify on the TPB public register
+                  Check the public register
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
-              </RevealItem>
+              </dd>
+            </div>
 
-              <RevealItem className="card flex flex-col gap-3 p-6">
-                <span className="icon-badge">
-                  <GraduationCap className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <h3 className="font-semibold text-slate-900">
-                  Established {siteConfig.credentials.yearEstablished}
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  Serving clients across the {siteConfig.contact.areaServed} for{" "}
-                  {siteConfig.credentials.yearsExperience}+ years with personal,
-                  accountable tax and accounting support from our Gregory Hills
-                  office.
-                </p>
-              </RevealItem>
-
-              <RevealItem className="card flex flex-col gap-3 p-6">
-                <span className="icon-badge">
-                  <Clock3 className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <h3 className="font-semibold text-slate-900">
-                  Easy to reach during business hours
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  Monday to Friday, 9:00am – 5:00pm. Call{" "}
-                  <a
-                    href={siteConfig.contact.phoneHref}
-                    className="font-semibold text-primary-700 hover:text-primary-800"
-                  >
-                    {siteConfig.contact.phoneDisplay}
-                  </a>{" "}
-                  or email{" "}
-                  <a
-                    href={`mailto:${siteConfig.contact.enquiryEmail}`}
-                    className="font-semibold text-primary-700 hover:text-primary-800"
-                  >
-                    {siteConfig.contact.enquiryEmail}
-                  </a>
-                  .
-                </p>
-              </RevealItem>
-            </RevealGroup>
-          </div>
+            <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
+              <dt className="font-heading text-xl font-semibold">
+                Business details
+              </dt>
+              <dd className="text-ink-soft">
+                {siteConfig.legalName}, ABN{" "}
+                <span className="tabular">{credentials.abn}</span>. Established{" "}
+                {credentials.yearEstablished}.
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-page flex flex-col gap-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Working With Us"
-              title="A simple process from first enquiry to lodgement"
-              description="We keep the steps clear so you always know where things stand."
-            />
-          </Reveal>
-
-          <RevealGroup className="grid gap-6 md:grid-cols-3">
-            {workingWithUs.map(({ icon: Icon, title, description }) => (
-              <RevealItem key={title} className="card flex flex-col gap-4 p-6">
-                <span className="icon-badge">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+      {/* Reasons */}
+      <section className="border-y border-ink/15 bg-paper-deep/60">
+        <div className="container-page grid gap-12 py-20 lg:grid-cols-12 lg:py-24">
+          <h2 className="font-heading text-display-md lg:col-span-4">
+            What you can count on
+          </h2>
+          <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-8">
+            {siteConfig.whyChooseUs.slice(2).map((reason, i) => (
+              <li key={reason.title} className="border-t border-ink pt-5">
+                <span className="font-heading text-lg tabular text-accent-700">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  {description}
-                </p>
-              </RevealItem>
+                <h3 className="mt-2 font-heading text-2xl">{reason.title}</h3>
+                <p className="mt-2 text-ink-soft">{reason.description}</p>
+              </li>
             ))}
-          </RevealGroup>
-
-          <Reveal>
-            <Link
-              href="/book-appointment"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 hover:text-primary-800"
-            >
-              Book a consultation
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Reveal>
+          </ol>
         </div>
       </section>
 
-      <CtaBanner
-        title="Talk to your accountant directly"
-        description="No account managers, no hand-offs — just a straightforward conversation about your tax and accounting needs."
+      {/* Process */}
+      <section className="section">
+        <div className="container-page">
+          <h2 className="font-heading text-display-md">
+            What working with us looks like
+          </h2>
+          <ol className="mt-12 grid gap-10 md:grid-cols-3">
+            {steps.map((step, i) => (
+              <li key={step.title} className="border-t border-ink pt-5">
+                <span className="font-heading text-5xl tabular text-primary-700">
+                  {i + 1}
+                </span>
+                <h3 className="mt-3 font-heading text-2xl">{step.title}</h3>
+                <p className="mt-2 text-ink-soft">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <ClosingCta
+        heading="Talk to the people who’ll do the work."
+        text="No account managers and no ticket queue. Ring, and someone who knows tax picks up."
       />
     </>
   );

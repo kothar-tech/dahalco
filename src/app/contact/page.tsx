@@ -1,138 +1,116 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Phone, Clock3 } from "lucide-react";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
+import MapEmbed from "@/components/MapEmbed";
+import PageIntro from "@/components/PageIntro";
 import { siteConfig } from "@/lib/site-config";
 
+const { contact } = siteConfig;
+
 export const metadata: Metadata = {
-  title: "Contact & Enquiries",
-  description: `Get in touch with ${siteConfig.name} — send an enquiry and we'll respond promptly, usually within one business day.`,
+  title: "Contact",
+  description: `Ring ${contact.phoneDisplay}, email ${contact.enquiryEmail} or visit ${siteConfig.name} at ${contact.addressLine1}, ${contact.suburb} ${contact.state}.`,
   alternates: { canonical: "/contact" },
 };
 
-const details = [
-  {
-    icon: Phone,
-    label: "Phone",
-    content: (
-      <a href={siteConfig.contact.phoneHref} className="hover:text-primary-700">
-        {siteConfig.contact.phoneDisplay}
-      </a>
-    ),
-  },
-  {
-    icon: Mail,
-    label: "Enquiries",
-    content: (
-      <a
-        href={`mailto:${siteConfig.contact.enquiryEmail}`}
-        className="hover:text-primary-700"
-      >
-        {siteConfig.contact.enquiryEmail}
-      </a>
-    ),
-  },
-  {
-    icon: Mail,
-    label: "Direct",
-    content: (
-      <a
-        href={`mailto:${siteConfig.contact.email}`}
-        className="hover:text-primary-700"
-      >
-        {siteConfig.contact.email}
-      </a>
-    ),
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    content: (
-      <>
-        <a
-          href={siteConfig.contact.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-primary-700"
-        >
-          {siteConfig.contact.addressLine1}
-          <br />
-          {siteConfig.contact.suburb} {siteConfig.contact.state}{" "}
-          {siteConfig.contact.postcode}
-        </a>
-        <span className="mt-1 block text-xs text-slate-400">
-          Serving {siteConfig.contact.areaServed}
-        </span>
-      </>
-    ),
-  },
-  {
-    icon: Clock3,
-    label: "Hours",
-    content: (
-      <ul>
-        {siteConfig.contact.hours.map((h) => (
-          <li key={h.days}>
-            {h.days}: {h.time}
-          </li>
-        ))}
-      </ul>
-    ),
-  },
-];
-
 export default function ContactPage() {
   return (
-    <section className="section relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute -left-40 -top-20 h-96 w-96 rounded-full bg-primary-50 blur-3xl"
-      />
-      <div className="container-page relative grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
-        <div className="flex flex-col gap-8">
-          <Reveal>
-            <span className="eyebrow">Contact & Enquiry</span>
-            <h1 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Get in touch
-            </h1>
-            <p className="mt-4 text-base leading-relaxed text-slate-600">
-              Have a general question, or not sure which service you need? Send
-              us an enquiry and we&apos;ll get back to you — usually within one
-              business day. Prefer to lock in a specific time instead?{" "}
-              <a
-                href="/book-appointment"
-                className="font-semibold text-primary-700 hover:text-primary-800"
-              >
-                Request an appointment
-              </a>
-              .
-            </p>
-          </Reveal>
+    <>
+      <PageIntro title="Ring, write, or come in.">
+        <p>
+          The quickest way to reach us is the phone, 9am to 5pm on weekdays.
+          If you&rsquo;d rather write, use the form and we&rsquo;ll reply, usually
+          within one business day.
+        </p>
+      </PageIntro>
 
-          <RevealGroup className="flex flex-col gap-5">
-            {details.map(({ icon: Icon, label, content }) => (
-              <RevealItem key={label} className="flex items-start gap-4">
-                <span className="icon-badge h-10 w-10 rounded-lg">
-                  <Icon className="h-4.5 w-4.5" aria-hidden="true" />
-                </span>
-                <div className="text-sm text-slate-600">
-                  <p className="text-sm font-semibold text-slate-900">
-                    {label}
-                  </p>
-                  {content}
-                </div>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+      <section className="section">
+        <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <dl className="border-t border-ink">
+              <div className="border-b border-ink/15 py-5">
+                <dt className="text-sm text-ink-muted">Phone</dt>
+                <dd className="mt-1">
+                  <a
+                    href={contact.phoneHref}
+                    className="font-heading text-3xl tabular text-ink underline decoration-accent-500 decoration-2 underline-offset-8 transition-colors hover:text-primary-700"
+                  >
+                    {contact.phoneDisplay}
+                  </a>
+                </dd>
+              </div>
+              <div className="border-b border-ink/15 py-5">
+                <dt className="text-sm text-ink-muted">Enquiries</dt>
+                <dd className="mt-1 text-lg">
+                  <a
+                    href={`mailto:${contact.enquiryEmail}`}
+                    className="text-ink underline decoration-ink/30 underline-offset-4 hover:text-primary-700"
+                  >
+                    {contact.enquiryEmail}
+                  </a>
+                </dd>
+              </div>
+              <div className="border-b border-ink/15 py-5">
+                <dt className="text-sm text-ink-muted">Direct to Uday</dt>
+                <dd className="mt-1 text-lg">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="text-ink underline decoration-ink/30 underline-offset-4 hover:text-primary-700"
+                  >
+                    {contact.email}
+                  </a>
+                </dd>
+              </div>
+              <div className="border-b border-ink/15 py-5">
+                <dt className="text-sm text-ink-muted">Office</dt>
+                <dd className="mt-1 text-lg">
+                  <a
+                    href={contact.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink underline decoration-ink/30 underline-offset-4 hover:text-primary-700"
+                  >
+                    {contact.addressLine1}
+                    <br />
+                    {contact.suburb} {contact.state} {contact.postcode}
+                  </a>
+                </dd>
+              </div>
+              <div className="border-b border-ink/15 py-5">
+                <dt className="text-sm text-ink-muted">Hours</dt>
+                <dd className="mt-1">
+                  <ul className="space-y-1 tabular">
+                    {contact.hours.map((h) => (
+                      <li key={h.days} className="flex justify-between gap-6">
+                        <span>{h.days}</span>
+                        <span className="text-ink-soft">{h.time}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+
+            <MapEmbed className="mt-10 h-72" />
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="border border-ink bg-white p-6 sm:p-9">
+              <h2 className="font-heading text-3xl">Send us a message</h2>
+              <p className="mt-2 text-ink-soft">
+                Want a set time instead?{" "}
+                <Link href="/book-appointment" className="text-link">
+                  Book a time
+                </Link>
+                .
+              </p>
+              <div className="mt-8">
+                <ContactForm />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <Reveal
-          delay={0.1}
-          className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8"
-        >
-          <ContactForm />
-        </Reveal>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

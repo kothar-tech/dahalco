@@ -1,125 +1,196 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import {
-  Target,
-  MessageCircleHeart,
-  Timer,
-  HeartHandshake,
-} from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
-import CtaBanner from "@/components/CtaBanner";
-import PageHero from "@/components/PageHero";
-import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
+import ClosingCta from "@/components/ClosingCta";
+import PageIntro from "@/components/PageIntro";
+import PersonTile from "@/components/PersonTile";
 import { siteConfig } from "@/lib/site-config";
 
+const { contact, credentials, ceo, team } = siteConfig;
+
 export const metadata: Metadata = {
-  title: "About Our Practice",
-  description: `Learn about ${siteConfig.name}, a registered tax agent based in ${siteConfig.contact.suburb}, ${siteConfig.contact.state} serving individuals and small businesses across the ${siteConfig.contact.areaServed}.`,
+  title: "About us",
+  description: `Meet the people at ${siteConfig.name}, a CPA Practice and registered tax agent in ${contact.suburb}, NSW, looking after individuals, families and small businesses since ${credentials.yearEstablished}.`,
   alternates: { canonical: "/about" },
 };
 
-const approach = [
+const principles = [
   {
-    icon: Target,
-    title: "Accuracy first",
-    description:
-      "Every return and lodgement is checked carefully against current ATO rules — we'd rather get it right than get it out the door fast.",
+    title: "Explain first, lodge second.",
+    text: "You’ll hear what we’ve done, and why, before anything goes to the ATO.",
   },
   {
-    icon: MessageCircleHeart,
-    title: "Plain-English advice",
-    description:
-      "No jargon, no lecture — just a clear explanation of your options and what we recommend, in language that actually makes sense.",
+    title: "Same people, every time.",
+    text: "Your file stays with the people who know it, so you’re never starting the story again.",
   },
   {
-    icon: Timer,
-    title: "Responsive turnaround",
-    description:
-      "Enquiries and questions get a real reply, promptly — not a queue behind a call centre or an automated ticketing system.",
+    title: "Early warnings.",
+    text: "If something will cost you money or a deadline is slipping, we tell you when we know, not when it’s due.",
   },
   {
-    icon: HeartHandshake,
-    title: "A year-round relationship",
-    description:
-      "We're here beyond tax time — for the business decision, the ATO letter, or the question that comes up in the middle of the year.",
+    title: "Your records stay private.",
+    text: "We use them for the work you’ve asked us to do, and nothing else.",
   },
 ];
 
+const facts = [
+  ["Established", String(credentials.yearEstablished)],
+  ["Practice", "CPA Practice"],
+  ["Tax agent", `TPB ${credentials.tpbNumber}`],
+  ["ABN", credentials.abn],
+  ["Office", `${contact.addressLine1}, ${contact.suburb} ${contact.state}`],
+  ["Hours", `${contact.hours[0].days}, ${contact.hours[0].time}`],
+];
+
 export default function AboutPage() {
+  const initials = ceo.name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
+
   return (
     <>
-      <PageHero
-        eyebrow="About Our Practice"
-        title="Accounting support built around you, not the other way around"
-        description={`${siteConfig.name} is a registered tax agency based in ${siteConfig.contact.suburb}, ${siteConfig.contact.state}, providing tax and accounting services to individuals and small businesses across ${siteConfig.contact.areaServed}.`}
-      />
+      <PageIntro title="Who you’ll be dealing with." tone="blue">
+        <p>
+          {siteConfig.name} is a CPA Practice and registered tax agency on Lasso
+          Road in {contact.suburb}. Since {credentials.yearEstablished} we&rsquo;ve
+          done the tax and accounts for local individuals, families and small
+          businesses.
+        </p>
+      </PageIntro>
 
+      {/* The practice */}
       <section className="section">
-        <div className="container-page grid gap-14 lg:grid-cols-2 lg:items-center">
-          <Reveal className="relative mx-auto w-full max-w-md">
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-4 -right-4 h-full w-full rounded-2xl bg-accent-500/20"
-            />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl shadow-primary-900/15">
-              <Image
-                src="/images/about-consultation.jpg"
-                alt="Two professionals reviewing paperwork together during a consultation"
-                fill
-                sizes="(min-width: 1024px) 28rem, 90vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <div className="flex flex-col gap-8">
-            <Reveal delay={0.08}>
-              <SectionHeading
-                eyebrow="Our Approach"
-                title="Straightforward accounting, without the runaround"
-                description="We work with individuals, sole traders and growing businesses who want a tax agent they can actually reach — someone who explains the 'why', not just the paperwork."
-              />
-            </Reveal>
-            <RevealGroup className="grid gap-6 sm:grid-cols-2">
-              {approach.map(({ icon: Icon, title, description }) => (
-                <RevealItem key={title} className="flex flex-col gap-3">
-                  <span className="icon-badge">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-semibold text-slate-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">
-                    {description}
-                  </p>
-                </RevealItem>
-              ))}
-            </RevealGroup>
+        <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="space-y-6 text-lg leading-relaxed text-ink-soft lg:col-span-7">
+            <p className="font-heading text-display-md leading-snug text-ink">
+              We work with people who&rsquo;d like their tax sorted by someone
+              they can ring.
+            </p>
+            <p>
+              Some clients come once a year for a return. Others have us on call
+              for BAS, payroll and everything in between. Either way, you deal
+              with a small team that knows your file.
+            </p>
+            <p>
+              As a registered tax agent we&rsquo;re bound by the Tax
+              Practitioners Board&rsquo;s code of conduct, and as a CPA Practice
+              we&rsquo;re held to {credentials.professionalBody}&rsquo;s
+              professional and ethical standards too.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="section bg-slate-50">
-        <div className="container-page grid gap-10 lg:grid-cols-3">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Who We Work With"
-              title={`Individuals and small businesses across the ${siteConfig.contact.areaServed}`}
-              description="From a first tax return to ongoing BAS and payroll, we tailor the level of support to what you actually need."
-            />
-          </Reveal>
-          <RevealGroup className="flex flex-wrap content-start gap-3 lg:col-span-2">
-            {siteConfig.clientTypes.map((type) => (
-              <RevealItem key={type}>
-                <span className="inline-block rounded-full border border-primary-100 bg-white px-4 py-2 text-sm font-medium text-primary-800 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
-                  {type}
-                </span>
-              </RevealItem>
+          <dl className="border-t border-ink lg:col-span-5">
+            {facts.map(([label, value]) => (
+              <div
+                key={label}
+                className="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-ink/15 py-4"
+              >
+                <dt className="text-sm text-ink-muted">{label}</dt>
+                <dd className="font-medium tabular text-ink">{value}</dd>
+              </div>
             ))}
-          </RevealGroup>
+          </dl>
         </div>
       </section>
 
-      <CtaBanner
-        title="Want to know if we're the right fit?"
-        description="A quick conversation is the easiest way to find out. Reach out and let's talk about what you need."
+      {/* CEO message */}
+      <section className="border-y border-ink/15 bg-paper-deep/60">
+        <div className="container-page grid gap-12 py-20 lg:grid-cols-12 lg:items-center lg:gap-16 lg:py-28">
+          <div className="w-full max-w-[15rem] lg:col-span-4 lg:max-w-none">
+            <PersonTile
+              name={ceo.name}
+              photo={ceo.photo}
+              initials={initials}
+              tone="blue"
+            />
+          </div>
+
+          <figure className="lg:col-span-8">
+            <p className="text-sm text-ink-muted">A word from our CEO</p>
+            <blockquote className="mt-4">
+              <p className="font-heading text-[1.7rem] leading-snug text-ink sm:text-3xl">
+                &ldquo;{ceo.message[0]}&rdquo;
+              </p>
+              <div className="mt-6 space-y-4 text-lg text-ink-soft">
+                {ceo.message.slice(1).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </blockquote>
+            <figcaption className="mt-8 border-t border-ink/20 pt-5">
+              <span className="font-heading text-xl font-semibold text-ink">
+                {ceo.name}
+              </span>
+              <span className="text-ink-soft">, {ceo.title}</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="section">
+        <div className="container-page">
+          <div className="grid gap-6 lg:grid-cols-12">
+            <h2 className="font-heading text-display-md lg:col-span-5">
+              The team
+            </h2>
+            <p className="max-w-lg text-lg text-ink-soft lg:col-span-6 lg:col-start-7">
+              The people you&rsquo;ll speak to when you ring, email or come in.
+            </p>
+          </div>
+
+          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:mt-14 sm:grid-cols-3 sm:gap-y-14">
+            {team.map((member) => (
+              <li
+                key={member.role}
+                className="grid grid-cols-[6.5rem_1fr] items-start gap-x-5 sm:block"
+              >
+                <PersonTile
+                  name={member.name}
+                  photo={member.photo}
+                  tone={member.tone}
+                />
+                <div className="sm:mt-5">
+                  <h3
+                    className={`font-heading text-2xl ${
+                      member.placeholder ? "text-ink-muted" : "text-ink"
+                    }`}
+                  >
+                    {member.name}
+                  </h3>
+                  <p className="mt-0.5 font-semibold text-primary-700">
+                    {member.role}
+                  </p>
+                  <p className="mt-3 text-ink-soft">{member.bio}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* How we work */}
+      <section className="border-t border-ink/15">
+        <div className="container-page grid gap-12 py-20 lg:grid-cols-12 lg:py-24">
+          <h2 className="font-heading text-display-md lg:col-span-4">
+            How we work
+          </h2>
+          <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-8">
+            {principles.map((item, i) => (
+              <li key={item.title} className="border-t border-ink pt-5">
+                <span className="font-heading text-lg tabular text-accent-700">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-2 font-heading text-2xl">{item.title}</h3>
+                <p className="mt-2 text-ink-soft">{item.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <ClosingCta
+        heading="Want to meet us before you decide?"
+        text="Ring, or book a time. The first conversation is a chance to see whether we’re the right fit."
       />
     </>
   );

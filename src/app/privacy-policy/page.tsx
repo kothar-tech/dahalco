@@ -1,89 +1,79 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy policy",
   alternates: { canonical: "/privacy-policy" },
   robots: { index: false, follow: true },
 };
 
+const sections = [
+  {
+    title: "Information we collect",
+    text: "When you send an enquiry or appointment request through this website, we collect the details you give us: your name, phone number, email address and the content of your message. We may also collect further personal and financial information directly from you as part of providing tax and accounting services.",
+  },
+  {
+    title: "How we use your information",
+    text: "We use the information you give us to respond to your enquiry, confirm appointment requests, and deliver the accounting and tax services you engage us for. We do not sell your personal information to anyone.",
+  },
+  {
+    title: "How we store your information",
+    text: "Information sent through this website is handled securely and kept only as long as we need it to respond to your enquiry or meet our professional and legal obligations as a registered tax agent.",
+  },
+];
+
 export default function PrivacyPolicyPage() {
+  const { contact } = siteConfig;
+
   return (
-    <section className="section">
-      <div className="container-page max-w-3xl">
-        <span className="eyebrow">Legal</span>
-        <h1 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
-          Privacy Policy
-        </h1>
+    <>
+      <PageIntro title="Privacy policy." />
 
-        <div className="mt-6 rounded-lg border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">
-          This is placeholder/template text for the demo. Please have it reviewed
-          by a qualified professional before publishing, so it accurately reflects
-          how {siteConfig.legalName} actually collects, uses and stores personal
-          information, and meets Australian Privacy Principles obligations.
-        </div>
-
-        <div className="mt-10 flex flex-col gap-8">
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">Information we collect</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              When you submit an enquiry or appointment request through this
-              website, we collect the details you provide — such as your name,
-              phone number, email address, and the content of your message. We
-              may also collect further personal and financial information
-              directly from you as part of providing tax and accounting
-              services.
-            </p>
+      <section className="section">
+        <div className="container-page max-w-3xl">
+          <div className="border border-dashed border-ink/40 bg-paper-deep/60 p-5 text-[15px] text-ink-soft">
+            This is template text for the review version of the site. Have it
+            checked by a qualified professional before publishing, so it
+            reflects how {siteConfig.legalName} actually collects, uses and
+            stores personal information and meets the Australian Privacy
+            Principles.
           </div>
 
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">How we use your information</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              We use the information you provide to respond to your enquiry,
-              confirm appointment requests, and deliver the accounting and
-              taxation services you engage us for. We do not sell your personal
-              information to third parties.
-            </p>
-          </div>
+          <div className="mt-12 space-y-10">
+            {sections.map((section) => (
+              <div key={section.title}>
+                <h2 className="font-heading text-2xl">{section.title}</h2>
+                <p className="mt-3 text-ink-soft">{section.text}</p>
+              </div>
+            ))}
 
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">How we store your information</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Information submitted through this website is handled securely
-              and retained only as long as necessary to respond to your
-              enquiry or fulfil our professional and legal obligations as a
-              registered tax agent.
-            </p>
-          </div>
+            <div>
+              <h2 className="font-heading text-2xl">Your rights</h2>
+              <p className="mt-3 text-ink-soft">
+                You can ask to see, or correct, the personal information we hold
+                about you at any time. Use the details on our{" "}
+                <Link href="/contact" className="text-link">
+                  contact page
+                </Link>
+                .
+              </p>
+            </div>
 
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">Your rights</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              You may request access to, or correction of, the personal
-              information we hold about you at any time by contacting us using
-              the details on our{" "}
-              <a href="/contact" className="font-semibold text-primary-700 hover:text-primary-800">
-                Contact page
-              </a>
-              .
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">Contact us</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              If you have questions about this privacy policy, contact us at{" "}
-              <a
-                href={`mailto:${siteConfig.contact.email}`}
-                className="font-semibold text-primary-700 hover:text-primary-800"
-              >
-                {siteConfig.contact.email}
-              </a>
-              .
-            </p>
+            <div>
+              <h2 className="font-heading text-2xl">Questions</h2>
+              <p className="mt-3 text-ink-soft">
+                If you have a question about this policy, email{" "}
+                <a href={`mailto:${contact.email}`} className="text-link">
+                  {contact.email}
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

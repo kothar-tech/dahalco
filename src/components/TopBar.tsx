@@ -7,33 +7,34 @@ const socialIcons: Record<string, typeof GoogleIcon> = {
 };
 
 export default function TopBar() {
+  const { contact } = siteConfig;
+
   return (
-    <div className="hidden border-b border-white/10 bg-primary-950 text-white lg:block">
-      <div className="container-page flex h-10 items-center justify-between text-xs">
-        <div className="flex items-center gap-5">
+    <div className="hidden bg-ink text-paper lg:block">
+      <div className="container-page flex h-10 items-center justify-between text-[13px]">
+        <div className="flex items-center gap-6">
           <a
-            href={siteConfig.contact.phoneHref}
-            className="flex items-center gap-1.5 font-medium text-white/90 transition-colors hover:text-accent-400"
+            href={contact.phoneHref}
+            className="flex items-center gap-2 font-medium tabular transition-colors hover:text-accent-300"
           >
             <Phone className="h-3.5 w-3.5 text-accent-400" aria-hidden="true" />
-            {siteConfig.contact.phoneDisplay}
+            {contact.phoneDisplay}
           </a>
           <a
-            href={`mailto:${siteConfig.contact.enquiryEmail}`}
-            className="flex items-center gap-1.5 font-medium text-white/90 transition-colors hover:text-accent-400"
+            href={`mailto:${contact.enquiryEmail}`}
+            className="flex items-center gap-2 font-medium transition-colors hover:text-accent-300"
           >
             <Mail className="h-3.5 w-3.5 text-accent-400" aria-hidden="true" />
-            {siteConfig.contact.enquiryEmail}
+            {contact.enquiryEmail}
           </a>
           <a
-            href={siteConfig.contact.mapsUrl}
+            href={contact.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 border-l border-white/15 pl-5 font-medium text-white/90 transition-colors hover:text-accent-400 xl:inline-flex"
+            className="hidden items-center gap-2 border-l border-paper/20 pl-6 font-medium transition-colors hover:text-accent-300 xl:inline-flex"
           >
             <MapPin className="h-3.5 w-3.5 text-accent-400" aria-hidden="true" />
-            {siteConfig.contact.suburb}, {siteConfig.contact.state} · Mon–Fri
-            9am–5pm
+            {contact.suburb}, {contact.state} · {contact.hoursShort}
           </a>
         </div>
 
@@ -49,7 +50,7 @@ export default function TopBar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-accent-500 hover:text-primary-950"
+                  className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-500 text-ink transition-colors hover:bg-accent-300"
                 >
                   <Icon className="h-3 w-3" aria-hidden="true" />
                 </a>

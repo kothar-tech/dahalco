@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import Logo from "@/components/Logo";
+import { CpaPracticeMark } from "@/components/icons/CpaPracticeIcon";
 import { GoogleIcon } from "@/components/icons/SocialIcons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -10,168 +11,176 @@ const socialIcons: Record<string, typeof GoogleIcon> = {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { contact, credentials } = siteConfig;
 
   return (
-    <footer className="relative overflow-hidden bg-primary-950 text-primary-100">
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-500 to-transparent"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-primary-800/30 blur-3xl"
-      />
-      <div className="container-page relative grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <Link href="/" className="inline-block rounded-lg bg-white px-3 py-2">
-            <Image
-              src="/images/logo-dahal-co-v2.png"
-              alt={`${siteConfig.name} — ${siteConfig.shortTagline}`}
-              width={200}
-              height={70}
-              unoptimized
-              className="h-11 w-auto"
-            />
-          </Link>
-          <p className="mt-4 text-sm leading-relaxed text-primary-200">
-            {siteConfig.metaDescription}
-          </p>
-          {siteConfig.social.length > 0 && (
-            <div className="mt-5 flex items-center gap-3">
-              {siteConfig.social.map((item) => {
-                const Icon = socialIcons[item.icon];
-                if (!Icon) return null;
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-accent-500 hover:text-primary-950"
-                  >
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        <div>
-          <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-white">
-            Services
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            {siteConfig.services.map((service) => (
-              <li key={service.slug}>
-                <Link
-                  href={`/services#${service.slug}`}
-                  className="text-primary-200 hover:text-white"
-                >
-                  {service.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-white">
-            Quick Links
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            {siteConfig.nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-primary-200 hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                href="/book-appointment"
-                className="text-primary-200 hover:text-white"
-              >
-                Book a Consultation
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/privacy-policy"
-                className="text-primary-200 hover:text-white"
-              >
-                Privacy Policy
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-white">
-            Get In Touch
-          </h3>
-          <ul className="mt-4 space-y-3 text-sm text-primary-200">
-            <li className="flex items-start gap-2.5">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              <a
-                href={siteConfig.contact.phoneHref}
-                className="hover:text-white"
-              >
-                {siteConfig.contact.phoneDisplay}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              <a
-                href={`mailto:${siteConfig.contact.enquiryEmail}`}
-                className="hover:text-white"
-              >
-                {siteConfig.contact.enquiryEmail}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              <a
-                href={siteConfig.contact.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white"
-              >
-                {siteConfig.contact.addressLine1}
-                <br />
-                {siteConfig.contact.suburb}, {siteConfig.contact.state}{" "}
-                {siteConfig.contact.postcode}
-              </a>
-            </li>
-          </ul>
+    <footer>
+      <div className="border-y border-ink/15 bg-paper-deep">
+        <div className="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:gap-8">
+          <CpaPracticeMark className="h-32" />
+          <div>
+            <p className="font-heading text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+              {siteConfig.name} is a CPA Practice.
+            </p>
+            <p className="mt-2 max-w-2xl text-ink-soft">
+              Our work is held to {credentials.professionalBody}&rsquo;s
+              professional and ethical standards. We&rsquo;re also a registered
+              tax agent, TPB number{" "}
+              <span className="tabular">{credentials.tpbNumber}</span>.
+            </p>
+          </div>
+          <a
+            href={credentials.cpaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link inline-flex items-center gap-1.5 sm:ml-auto"
+          >
+            About CPA Practices
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-primary-200 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {siteConfig.legalName} · ABN {siteConfig.credentials.abn} ·
-            Registered Tax Agent (TPB #{siteConfig.credentials.tpbNumber})
-          </p>
-          <div className="flex flex-col gap-1 sm:items-end">
-            <Link href="/privacy-policy" className="hover:text-white">
-              Privacy Policy
+      <div className="bg-ink text-paper/80">
+        <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Link
+              href="/"
+              aria-label={`${siteConfig.name} home`}
+              className="inline-block"
+            >
+              <Logo variant="white" className="h-16" />
             </Link>
-            <p className="text-xs text-primary-200">
-              Made with care by{" "}
-              <Link
-                href="https://kothartechsolutions.com"
-                className="hover:text-white underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Kothar Tech
-              </Link>
+            <p className="mt-6 max-w-xs text-[15px] leading-relaxed">
+              Accountants and registered tax agents in {contact.suburb}, looking
+              after individuals, families and small businesses since{" "}
+              {credentials.yearEstablished}.
             </p>
+            {siteConfig.social.length > 0 && (
+              <div className="mt-6 flex items-center gap-3">
+                {siteConfig.social.map((item) => {
+                  const Icon = socialIcons[item.icon];
+                  if (!Icon) return null;
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink transition-colors hover:bg-accent-300"
+                    >
+                      <Icon
+                        className="h-[1.1rem] w-[1.1rem]"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          <div className="lg:col-span-3 lg:col-start-6">
+            <h2 className="font-heading text-xl text-white">Services</h2>
+            <ul className="mt-5 space-y-3 text-[15px]">
+              {siteConfig.services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services#${service.slug}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-4">
+            <h2 className="font-heading text-xl text-white">Visit or ring</h2>
+            <ul className="mt-5 space-y-4 text-[15px]">
+              <li className="flex items-start gap-3">
+                <MapPin
+                  className="mt-1 h-4 w-4 shrink-0 text-white"
+                  aria-hidden="true"
+                />
+                <a
+                  href={contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  {contact.addressLine1}
+                  <br />
+                  {contact.suburb} {contact.state} {contact.postcode}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone
+                  className="mt-1 h-4 w-4 shrink-0 text-white"
+                  aria-hidden="true"
+                />
+                <a
+                  href={contact.phoneHref}
+                  className="tabular transition-colors hover:text-white"
+                >
+                  {contact.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail
+                  className="mt-1 h-4 w-4 shrink-0 text-white"
+                  aria-hidden="true"
+                />
+                <a
+                  href={`mailto:${contact.enquiryEmail}`}
+                  className="transition-colors hover:text-white"
+                >
+                  {contact.enquiryEmail}
+                </a>
+              </li>
+            </ul>
+            <p className="mt-5 text-sm text-paper/60">
+              {contact.hours[0].days}, {contact.hours[0].time}
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+              {siteConfig.nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="underline decoration-paper/25 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-paper/15">
+          <div className="container-page flex flex-col gap-3 py-6 text-[13px] text-paper/60 md:flex-row md:items-center md:justify-between">
+            <p>
+              © {year} {siteConfig.legalName}. ABN {credentials.abn}. Registered
+              tax agent, TPB {credentials.tpbNumber}.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link href="/privacy-policy" className="hover:text-white">
+                Privacy policy
+              </Link>
+              <p>
+                Website by{" "}
+                <a
+                  href="https://kothartechsolutions.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-white"
+                >
+                  Kothar Tech
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

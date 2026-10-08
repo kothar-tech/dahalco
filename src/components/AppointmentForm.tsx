@@ -4,7 +4,11 @@ import { FormEvent, ReactNode, useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
-const TIME_PREFERENCES = ["Morning (9am – 12pm)", "Afternoon (12pm – 5:00pm)", "No preference"];
+const TIME_PREFERENCES = [
+  "Morning (9am – 12pm)",
+  "Afternoon (12pm – 5pm)",
+  "No preference",
+];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -42,14 +46,12 @@ export default function AppointmentForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-xl border border-primary-100 bg-primary-50 p-10 text-center">
-        <CheckCircle2 className="h-10 w-10 text-primary-700" aria-hidden="true" />
-        <h3 className="font-heading text-xl font-semibold text-slate-900">
-          Request received.
-        </h3>
-        <p className="max-w-sm text-sm text-slate-600">
-          Thanks — we&apos;ll confirm your preferred time (or suggest a nearby one) by
-          phone or email shortly.
+      <div className="flex flex-col items-start gap-3 border border-primary-200 bg-primary-50 p-8">
+        <CheckCircle2 className="h-8 w-8 text-primary-700" aria-hidden="true" />
+        <h3 className="font-heading text-2xl text-ink">Request received.</h3>
+        <p className="max-w-sm text-ink-soft">
+          We&rsquo;ll ring or email to confirm your time, or suggest one close to
+          it.
         </p>
         <button
           type="button"
@@ -65,7 +67,7 @@ export default function AppointmentForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full name" htmlFor="apt-name">
+        <Field label="Your name" htmlFor="apt-name">
           <input id="apt-name" name="name" type="text" required autoComplete="name" className="input" />
         </Field>
         <Field label="Phone" htmlFor="apt-phone">
@@ -77,7 +79,7 @@ export default function AppointmentForm() {
         <input id="apt-email" name="email" type="email" required autoComplete="email" className="input" />
       </Field>
 
-      <Field label="Service you need" htmlFor="apt-service">
+      <Field label="What do you need help with?" htmlFor="apt-service">
         <select id="apt-service" name="service" className="input" defaultValue={siteConfig.services[0].title}>
           {siteConfig.services.map((service) => (
             <option key={service.slug} value={service.title}>
@@ -89,7 +91,7 @@ export default function AppointmentForm() {
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Preferred date" htmlFor="apt-date">
+        <Field label="Preferred day" htmlFor="apt-date">
           <input
             id="apt-date"
             name="preferredDate"
@@ -110,23 +112,26 @@ export default function AppointmentForm() {
         </Field>
       </div>
 
-      <Field label="Anything else we should know?" htmlFor="apt-notes">
+      <Field label="Anything we should know?" htmlFor="apt-notes">
         <textarea
           id="apt-notes"
           name="notes"
           rows={4}
           className="input resize-none"
-          placeholder="Optional — e.g. specific documents you'll bring, or context on your situation."
+          placeholder="Optional. For example, documents you’ll bring, or what’s prompted the visit."
         />
       </Field>
 
-      <p className="text-xs text-slate-500">
-        This is a request, not a confirmed booking — we&apos;ll follow up by phone or
-        email to lock in a time that works for both of us.
+      <p className="text-sm text-ink-muted">
+        This is a request, not a confirmed booking. We&rsquo;ll follow up to lock
+        in a time that works for both of us.
       </p>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div
+          role="alert"
+          className="flex items-center gap-2 border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+        >
           <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
           {errorMessage}
         </div>
@@ -135,10 +140,10 @@ export default function AppointmentForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:self-start"
       >
         {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" />}
-        {status === "submitting" ? "Submitting…" : "Request Appointment"}
+        {status === "submitting" ? "Sending…" : "Request this time"}
       </button>
     </form>
   );
@@ -155,7 +160,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-slate-700">
+      <label htmlFor={htmlFor} className="text-sm font-semibold text-ink">
         {label}
       </label>
       {children}

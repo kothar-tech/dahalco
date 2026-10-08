@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
+import Logo from "@/components/Logo";
 import { siteConfig } from "@/lib/site-config";
 
 export default function Header() {
@@ -14,151 +13,138 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const { primary } = siteConfig.headerCtas;
+
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-white/90 backdrop-blur-md transition-all duration-300 ${
-        scrolled
-          ? "border-slate-200 shadow-[0_4px_20px_-8px_rgba(15,32,55,0.15)]"
-          : "border-transparent"
+      className={`sticky top-0 z-50 border-b bg-paper/95 backdrop-blur transition-colors ${
+        scrolled ? "border-ink/20" : "border-ink/10"
       }`}
     >
-      <div
-        className={`container-page flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "h-16" : "h-20"
-        }`}
-      >
+      <div className="container-page flex items-center justify-between gap-6">
         <Link
           href="/"
-          className="flex items-center"
-          onClick={() => setOpen(false)}
           aria-label={`${siteConfig.name} home`}
+          onClick={() => setOpen(false)}
+          className="py-3"
         >
-          <Image
-            src="/images/logo-dahal-co-v2.png"
-            alt={`${siteConfig.name} — ${siteConfig.shortTagline}`}
-            width={280}
-            height={90}
+          <Logo
             priority
-            unoptimized
-            className={`w-auto transition-all duration-300 ${
-              scrolled ? "h-10" : "h-12"
+            className={`transition-[height] duration-200 ${
+              scrolled ? "h-12 md:h-14" : "h-14 md:h-[4.5rem]"
             }`}
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
           {siteConfig.nav.map((item) => {
-            const active = pathname === item.href;
+            const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group relative px-3.5 py-2 text-sm font-medium transition-colors ${
+                aria-current={active ? "page" : undefined}
+                className={`text-[15px] font-medium underline decoration-2 underline-offset-[10px] transition-colors ${
                   active
-                    ? "text-primary-700"
-                    : "text-slate-600 hover:text-primary-700"
+                    ? "text-primary-700 decoration-accent-500"
+                    : "text-ink decoration-transparent hover:text-primary-700 hover:decoration-ink/30"
                 }`}
               >
                 {item.label}
-                <span
-                  className={`absolute inset-x-3 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-accent-500 transition-transform duration-200 group-hover:scale-x-100 ${
-                    active ? "scale-x-100" : ""
-                  }`}
-                />
               </Link>
             );
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            href={siteConfig.headerCtas.secondary.href}
-            className="btn-outline-dark"
+        <div className="hidden items-center gap-6 lg:flex">
+          <a
+            href={siteConfig.contact.phoneHref}
+            className="text-[15px] font-semibold tabular text-ink transition-colors hover:text-primary-700"
           >
-            {siteConfig.headerCtas.secondary.label}
-          </Link>
-          <Link
-            href={siteConfig.headerCtas.primary.href}
-            className="btn-primary"
-          >
-            {siteConfig.headerCtas.primary.label}
+            {siteConfig.contact.phoneDisplay}
+          </a>
+          <Link href={primary.href} className="btn-primary">
+            {primary.label}
           </Link>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <a
+            href={siteConfig.contact.phoneHref}
+            aria-label={`Call ${siteConfig.contact.phoneDisplay}`}
+            className="flex h-11 w-11 items-center justify-center rounded-md text-primary-700"
+          >
+            <Phone className="h-5 w-5" aria-hidden="true" />
+          </a>
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-md text-ink"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden border-t border-slate-100 bg-white lg:hidden"
-          >
-            <nav
-              className="container-page flex flex-col gap-1 py-4"
-              aria-label="Mobile"
-            >
+      <div
+        id="mobile-menu"
+        inert={!open}
+        className={`grid transition-[grid-template-rows] duration-300 lg:hidden ${
+          open ? "grid-rows-[1fr] border-t border-ink/10" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <nav className="container-page py-3" aria-label="Mobile">
+            <ul className="divide-y divide-ink/10">
               {siteConfig.nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-md px-3 py-2.5 text-sm font-medium ${
-                    pathname === item.href
-                      ? "bg-primary-50 text-primary-700"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`block py-4 font-heading text-2xl ${
+                      isActive(item.href) ? "text-primary-700" : "text-ink"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               ))}
-
-              <div className="mt-2 flex items-center gap-4 border-t border-slate-100 px-3 pt-4">
-                <a
-                  href={siteConfig.contact.phoneHref}
-                  className="text-sm text-slate-600"
-                >
-                  {siteConfig.contact.phoneDisplay}
-                </a>
-              </div>
-
-              <div className="mt-3 flex flex-col gap-2 px-3">
-                <Link
-                  href={siteConfig.headerCtas.secondary.href}
-                  onClick={() => setOpen(false)}
-                  className="btn-outline-dark w-full"
-                >
-                  {siteConfig.headerCtas.secondary.label}
-                </Link>
-                <Link
-                  href={siteConfig.headerCtas.primary.href}
-                  onClick={() => setOpen(false)}
-                  className="btn-primary w-full"
-                >
-                  {siteConfig.headerCtas.primary.label}
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </ul>
+            <div className="flex flex-col gap-3 pb-4 pt-3">
+              <Link
+                href={primary.href}
+                onClick={() => setOpen(false)}
+                className="btn-primary w-full"
+              >
+                {primary.label}
+              </Link>
+              <a
+                href={siteConfig.contact.phoneHref}
+                className="btn-outline-dark w-full tabular"
+              >
+                Ring {siteConfig.contact.phoneDisplay}
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 }
