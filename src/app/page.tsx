@@ -50,12 +50,11 @@ export default function HomePage() {
         <div className="container-page grid items-center gap-14 py-16 sm:py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
           <div className="lg:col-span-6">
             <h1 className="font-heading text-display-lg text-white">
-              A CPA practice for the tax and books of{" "}
-              <span className="whitespace-nowrap">south-west</span> Sydney.
+              Clear, trusted tax and accounting advice.
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/85">
               We&rsquo;re {siteConfig.name}, in {contact.suburb} since{" "}
-              {credentials.yearEstablished}. Individuals, families and small
+              {credentials.yearEstablished}. Individuals, families and
               businesses come to us for tax returns, BAS, bookkeeping and
               straight answers.
             </p>

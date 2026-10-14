@@ -76,7 +76,7 @@
 
   .tick-list li::before {
     content: "";
-    @apply mt-[0.65rem] h-1.5 w-1.5 shrink-0 rotate-45 bg-white;
+    @apply mt-[0.65rem] h-1.5 w-1.5 shrink-0 rotate-45 bg-accent-500;
   }
 }
 
