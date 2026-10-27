@@ -154,7 +154,7 @@ export default function Footer() {
                 Privacy policy
               </Link>
               <p>
-                Website by{" "}
+                Designed by &nbsp;
                 <a
                   href="https://kothartechsolutions.com"
                   target="_blank"

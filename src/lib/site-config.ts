@@ -184,7 +184,7 @@ const team: TeamMember[] = [
 const ceo = {
   name: "Uday Dahal",
   title: "CPA",
-  subitle: "Principle Accountant",
+  subitle: "Principal Accountant",
   photo: "/images/DahalPP.png",
   message: [
     "Tax causes stress mostly because no one takes the time to explain it. My aim is that you leave our office with a clear understanding of your own numbers, not just a lodged return and a head full of questions.",
