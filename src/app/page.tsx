@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ClosingCta from "@/components/ClosingCta";
+import HeroBackdrop from "@/components/HeroBackdrop";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -21,23 +22,19 @@ const facts = [
   { value: "Mon–Fri", label: `${contact.hours[0].time}, ${contact.suburb}` },
 ];
 
-const bringPersonal = [
-  "Your TFN and photo ID, if you’re new to us",
-  "Your income statements from myGov, or the details of who you worked for",
-  "Bank interest, dividend and share sale statements",
-  "Your private health insurance statement",
-  "Receipts and records for work-related expenses",
-  "Rental property statements and expense invoices",
-  "BSB and account number for your refund",
-];
-
-const bringBusiness = [
-  "Bank and credit card statements for the period",
-  "Sales invoices and expense receipts, or access to your accounting software",
-  "Payroll and super records",
-  "Last year’s accounts and tax return, if we didn’t do them",
-  "Any ATO letters, BAS or instalment notices",
-  "Loan, lease and asset purchase documents",
+const howItWorks = [
+  {
+    title: "Book a time or ring us",
+    text: "Tell us what you need help with. We’ll confirm your appointment by phone or email.",
+  },
+  {
+    title: "Bring what you have",
+    text: "Statements, receipts, letters, whatever you’ve got. We’ll tell you what’s missing and chase it up with you.",
+  },
+  {
+    title: "We explain, then lodge",
+    text: "You’ll hear what we’ve done and why before anything goes to the ATO, and we’ll keep you posted on due dates.",
+  },
 ];
 
 export default function HomePage() {
@@ -46,8 +43,9 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-ink text-white">
-        <div className="container-page grid items-center gap-14 py-16 sm:py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
+      <section className="relative overflow-hidden bg-ink text-white">
+        <HeroBackdrop />
+        <div className="container-page relative grid items-center gap-14 py-16 sm:py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
           <div className="lg:col-span-6">
             <h1 className="font-heading text-display-lg text-white">
               Clear, trusted tax and accounting advice.
@@ -167,55 +165,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* What to bring */}
-      {/* <section className="section">
-        <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
-          <div className="lg:col-span-4">
+      {/* Getting started */}
+      <section className="section">
+        <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+          <div className="lg:col-span-5">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden lg:max-w-none">
               <Image
                 src="/images/hero-desk-work.jpg"
                 alt="A hand marking up a printed financial report on a wooden desk"
                 fill
-                sizes="(min-width: 1024px) 30vw, 90vw"
+                sizes="(min-width: 1024px) 40vw, 90vw"
                 className="object-cover object-left"
               />
             </div>
           </div>
 
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-7">
             <h2 className="font-heading text-display-md">
-              Coming in? Here&rsquo;s what to bring.
+              Getting started is simple.
             </h2>
             <p className="mt-5 max-w-xl text-lg text-ink-soft">
               You don&rsquo;t need everything in order. Bring what you&rsquo;ve
               got and we&rsquo;ll tell you what&rsquo;s missing.
             </p>
 
-            <div className="mt-10 grid gap-10 sm:grid-cols-2">
-              <div>
-                <h3 className="border-b border-ink pb-3 font-heading text-xl">
-                  For your tax return
-                </h3>
-                <ul className="tick-list mt-5 space-y-3 text-[15px] text-ink-soft">
-                  {bringPersonal.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="border-b border-ink pb-3 font-heading text-xl">
-                  For a business
-                </h3>
-                <ul className="tick-list mt-5 space-y-3 text-[15px] text-ink-soft">
-                  {bringBusiness.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <ol className="mt-10 divide-y divide-ink/15 border-y border-ink/15">
+              {howItWorks.map((step, i) => (
+                <li
+                  key={step.title}
+                  className="grid gap-x-6 gap-y-1 py-6 sm:grid-cols-[3rem_1fr]"
+                >
+                  <span className="font-heading text-xl tabular text-accent-700">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="font-heading text-xl font-semibold text-ink">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1.5 text-ink-soft">{step.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
-      </section> */}
+      </section>
 
       <ClosingCta
         heading="Tax time, BAS due, or a letter from the ATO sitting on the bench?"

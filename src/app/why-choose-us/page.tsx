@@ -61,20 +61,6 @@ export default function WhyChooseUsPage() {
           <dl className="border-t border-ink lg:col-span-8">
             <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
               <dt className="font-heading text-xl font-semibold">
-                CPA Practice
-              </dt>
-              <dd>
-                <CpaPracticeMark className="h-14" />
-                <p className="mt-4 text-lg leading-snug text-ink">
-                  {siteConfig.name}
-                  <br />
-                  is a CPA Practice
-                </p>
-              </dd>
-            </div>
-
-            <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
-              <dt className="font-heading text-xl font-semibold">
                 Registered tax agent
               </dt>
               <dd className="text-ink-soft">
@@ -94,15 +80,31 @@ export default function WhyChooseUsPage() {
                 </a>
               </dd>
             </div>
-
             <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
               <dt className="font-heading text-xl font-semibold">
-                Business details
+                CPA Practice
+              </dt>
+              <dd className="flex items-center gap-8">
+                <CpaPracticeMark className="h-14" />
+                <p className="text-lg leading-snug text-ink">
+                  {siteConfig.name}
+                  <br />
+                  is a CPA Practice
+                </p>
+              </dd>
+            </div>
+            <div className="grid gap-4 border-b border-ink/15 py-7 md:grid-cols-[12rem_1fr] md:gap-8">
+              <dt className="font-heading text-xl font-semibold">
+                XERO Certified
               </dt>
               <dd className="text-ink-soft">
-                {siteConfig.legalName}, ABN{" "}
-                <span className="tabular">{credentials.abn}</span>. Established{" "}
-                {credentials.yearEstablished}.
+                <Image
+                  src={"/images/xero-advisor-copy.png"}
+                  alt="xero"
+                  width={140}
+                  height={120}
+                  className="w-auto object-contain object-left"
+                />
               </dd>
             </div>
           </dl>

@@ -76,9 +76,9 @@ const services: ServiceItem[] = [
     title: "Self-managed super funds (SMSF)",
     short: "Set-up, accounts, tax and audit for your SMSF.",
     description:
-      "Running your own super fund makes you the trustee, and the ATO holds trustees to account. We take care of the accounting, the annual return and the audit arrangements, and keep the fund on the right side of the super rules.",
+      "We take care of the accounting, the annual return and the audit arrangements, and keep the super funds on the right side of the super rules.",
     includes: [
-      "SMSF set-up, including trust deed, ABN, TFN and bank account",
+      "SMSF set-up, including trust deed, ABN, TFN.",
       "Annual financial statements and SMSF tax return",
       "Independent audit coordination",
       "Investment strategy and compliance reviews",
@@ -171,10 +171,10 @@ const services: ServiceItem[] = [
 // Placeholder team: replace names, roles, bios and photos with the real people.
 const team: TeamMember[] = [
   {
-    name: "CA. Chakra  Budha",
+    name: "Chakra  Budha, CA",
     role: "Senior Accountant",
-    bio: "Qualified Chartered Account with more than 10 years(5+ years in Australia) experience.",
-    photo: "/images/chakra.jpeg",
+    bio: "Qualified Chartered Accountant with more than 5 years local experience.",
+    photo: "/images/chakra.png",
     tone: "blue",
     placeholder: true,
   },
@@ -184,10 +184,11 @@ const team: TeamMember[] = [
 const ceo = {
   name: "Uday Dahal",
   title: "CPA",
-  photo: "/images/CoverDahal.png",
+  subitle: "Principle Accountant",
+  photo: "/images/DahalPP.png",
   message: [
     "Tax causes stress mostly because no one takes the time to explain it. My aim is that you leave our office with a clear understanding of your own numbers, not just a lodged return and a head full of questions.",
-    "We’re a CPA Practice, so there are professional standards behind every return we lodge. The standard I care about most is simpler: when you ring us, someone who knows your file should pick up.",
+    "We’re a CPA Practice, so there are professional standards behind every return we lodge. The standard we care about most is simpler: when you ring us, someone who knows your file should pick up.",
     "If you’re not sure where to start, call us or book a time. We’ll work it out together.",
   ],
 };

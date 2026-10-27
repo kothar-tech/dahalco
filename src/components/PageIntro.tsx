@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import HeroBackdrop from "@/components/HeroBackdrop";
 
 type PageIntroProps = {
   title: string;
@@ -15,8 +16,15 @@ export default function PageIntro({
   const blue = tone === "blue";
 
   return (
-    <section className={blue ? "bg-ink text-white" : "border-b border-ink/15"}>
-      <div className="container-page grid gap-8 py-14 sm:py-16 lg:grid-cols-12 lg:items-end lg:gap-12 lg:py-24">
+    <section
+      className={
+        blue
+          ? "relative overflow-hidden bg-ink text-white"
+          : "relative overflow-hidden border-b border-ink/15"
+      }
+    >
+      <HeroBackdrop dark={blue} />
+      <div className="container-page relative grid gap-8 py-14 sm:py-16 lg:grid-cols-12 lg:items-end lg:gap-12 lg:py-24">
         <h1
           className={`font-heading text-display-lg lg:col-span-7 ${
             blue ? "text-white" : "text-ink"

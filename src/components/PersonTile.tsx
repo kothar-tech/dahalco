@@ -29,8 +29,8 @@ export default function PersonTile({
           src={photo}
           alt={name}
           fill
-          sizes="(min-width: 1024px) 24rem, 90vw"
-          className="object-cover"
+          sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
+          className="object-cover object-top "
         />
       </div>
     );
@@ -47,7 +47,7 @@ export default function PersonTile({
       {initials ? (
         <span
           aria-hidden="true"
-          className="absolute inset-0 flex items-center justify-center font-heading text-8xl text-primary-700"
+          className="absolute inset-0 flex items-center justify-center font-heading text-6xl text-primary-700 sm:text-8xl"
         >
           {initials}
         </span>

@@ -85,7 +85,7 @@ export default function AboutPage() {
       {/* CEO message */}
       <section className="border-y border-ink/15 bg-paper-deep/60">
         <div className="container-page grid gap-12 py-20 lg:grid-cols-12 lg:items-center lg:gap-16 lg:py-28">
-          <div className="w-full max-w-[15rem] lg:col-span-4 lg:max-w-none">
+          <div className="w-full max-w-sm lg:col-span-4 lg:max-w-none">
             <PersonTile
               name={ceo.name}
               photo={ceo.photo}
@@ -110,7 +110,8 @@ export default function AboutPage() {
               <span className="font-heading text-xl font-semibold text-ink">
                 {ceo.name}
               </span>
-              <span className="text-ink-soft">, {ceo.title}</span>
+              <span className="text-ink-soft">, {ceo.title}</span> <br />
+              <span className="">{ceo.subitle}</span>
             </figcaption>
           </figure>
         </div>
@@ -128,20 +129,17 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:mt-14 sm:grid-cols-3 sm:gap-y-14">
+          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:mt-14 sm:grid-cols-2 sm:gap-y-14 lg:grid-cols-3">
             {team.map((member) => (
-              <li
-                key={member.role}
-                className="grid grid-cols-[6.5rem_1fr] items-start gap-x-5 sm:block"
-              >
+              <li key={member.role} className="max-w-sm">
                 <PersonTile
                   name={member.name}
                   photo={member.photo}
                   tone={member.tone}
                 />
-                <div className="sm:mt-5">
+                <div className="mt-5">
                   <h3
-                    className={`font-heading text-2xl ${
+                    className={`font-heading text-xl sm:text-2xl ${
                       member.placeholder ? "text-ink-muted" : "text-ink"
                     }`}
                   >
