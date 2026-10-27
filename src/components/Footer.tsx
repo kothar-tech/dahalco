@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
 import { CpaPracticeMark } from "@/components/icons/CpaPracticeIcon";
 import { GoogleIcon } from "@/components/icons/SocialIcons";
@@ -15,32 +15,6 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="border-y border-ink/15 bg-paper-deep">
-        <div className="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:gap-8">
-          <CpaPracticeMark className="h-32" />
-          <div>
-            <p className="font-heading text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-              {siteConfig.name} is a CPA Practice.
-            </p>
-            <p className="mt-2 max-w-2xl text-ink-soft">
-              Our work is held to {credentials.professionalBody}&rsquo;s
-              professional and ethical standards. We&rsquo;re also a registered
-              tax agent, TPB number{" "}
-              <span className="tabular">{credentials.tpbNumber}</span>.
-            </p>
-          </div>
-          <a
-            href={credentials.cpaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-link inline-flex items-center gap-1.5 sm:ml-auto"
-          >
-            About CPA Practices
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </div>
-
       <div className="bg-ink text-paper/80">
         <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -79,6 +53,16 @@ export default function Footer() {
                 })}
               </div>
             )}
+            {/* CPA brand guidelines: logo with the approved clause directly
+                beneath it, no larger than the practice's own logo. */}
+            <div className="flex items-center gap-4 mt-8">
+              <CpaPracticeMark className="h-14" />
+              <p className="text-base leading-snug text-white">
+                {siteConfig.name}
+                <br />
+                is a CPA Practice
+              </p>
+            </div>
           </div>
 
           <div className="lg:col-span-3 lg:col-start-6">
@@ -162,8 +146,8 @@ export default function Footer() {
         <div className="border-t border-paper/15">
           <div className="container-page flex flex-col gap-3 py-6 text-[13px] text-paper/60 md:flex-row md:items-center md:justify-between">
             <p>
-              © {year} {siteConfig.legalName}. ABN {credentials.abn}. Registered
-              tax agent, TPB {credentials.tpbNumber}.
+              © {year} {siteConfig.legalName}. Registered tax agent, TPB{" "}
+              {credentials.tpbNumber}.
             </p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <Link href="/privacy-policy" className="hover:text-white">

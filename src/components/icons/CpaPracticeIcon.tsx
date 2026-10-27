@@ -38,9 +38,9 @@ export function CpaPracticeMark({ className = "h-16" }: MarkProps) {
       <Image
         src={logo}
         alt="CPA Practice"
-        width={160}
+        width={280}
         height={160}
-        className={`object-contain ${className}`}
+        className={`w-auto object-contain object-left ${className}`}
       />
     );
   }

@@ -55,7 +55,7 @@ const services: ServiceItem[] = [
   },
   {
     slug: "business-returns-and-bas",
-    title: "Business returns and BAS",
+    title: "Business tax returns and BAS",
     short: "Company, trust and sole trader returns, plus BAS and GST.",
     description:
       "Annual returns for companies, trusts, partnerships and sole traders, and your BAS every quarter or month. We keep an eye on the due dates so you don’t have to.",
@@ -69,6 +69,27 @@ const services: ServiceItem[] = [
     image: {
       src: "/images/services-bas-papers.png",
       alt: "A BAS form and a tax return on a desk beside a calculator and laptop",
+    },
+  },
+  {
+    slug: "self-managed-super-funds",
+    title: "Self-managed super funds (SMSF)",
+    short: "Set-up, accounts, tax and audit for your SMSF.",
+    description:
+      "Running your own super fund makes you the trustee, and the ATO holds trustees to account. We take care of the accounting, the annual return and the audit arrangements, and keep the fund on the right side of the super rules.",
+    includes: [
+      "SMSF set-up, including trust deed, ABN, TFN and bank account",
+      "Annual financial statements and SMSF tax return",
+      "Independent audit coordination",
+      "Investment strategy and compliance reviews",
+      "Contributions, pensions and benefit payments",
+      "Winding up a fund or rolling it over",
+    ],
+    goodFor:
+      "Trustees and members who want their SMSF run properly, and anyone thinking about starting one.",
+    image: {
+      src: "/images/services-finance-desk.jpg",
+      alt: "An accountant reviewing superannuation fund statements at a desk",
     },
   },
   {
@@ -150,27 +171,11 @@ const services: ServiceItem[] = [
 // Placeholder team: replace names, roles, bios and photos with the real people.
 const team: TeamMember[] = [
   {
-    name: "Name to be added",
-    role: "Senior Tax Accountant",
-    bio: "Prepares and reviews personal and business returns, and is usually the person you’ll speak to about your tax.",
-    photo: null,
+    name: "CA. Chakra  Budha",
+    role: "Senior Accountant",
+    bio: "Qualified Chartered Account with more than 10 years(5+ years in Australia) experience.",
+    photo: "/images/chakra.jpeg",
     tone: "blue",
-    placeholder: true,
-  },
-  {
-    name: "Name to be added",
-    role: "BAS and Bookkeeping",
-    bio: "Keeps records, BAS and payroll on schedule for our small-business clients.",
-    photo: null,
-    tone: "sand",
-    placeholder: true,
-  },
-  {
-    name: "Name to be added",
-    role: "Client Services",
-    bio: "Looks after bookings and paperwork, and makes sure nothing sits in the queue.",
-    photo: null,
-    tone: "orange",
     placeholder: true,
   },
 ];
@@ -178,10 +183,10 @@ const team: TeamMember[] = [
 // Draft message for the CEO to approve or rewrite.
 const ceo = {
   name: "Uday Dahal",
-  title: "CEO",
-  photo: null as string | null,
+  title: "CPA",
+  photo: "/images/CoverDahal.png",
   message: [
-    "Tax stresses people out mostly because nobody explains it. I’d rather you walk out of our office understanding your own numbers than walk out with a return and a head full of questions.",
+    "Tax causes stress mostly because no one takes the time to explain it. My aim is that you leave our office with a clear understanding of your own numbers, not just a lodged return and a head full of questions.",
     "We’re a CPA Practice, so there are professional standards behind every return we lodge. The standard I care about most is simpler: when you ring us, someone who knows your file should pick up.",
     "If you’re not sure where to start, call us or book a time. We’ll work it out together.",
   ],

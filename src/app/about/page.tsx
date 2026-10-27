@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import ClosingCta from "@/components/ClosingCta";
 import PageIntro from "@/components/PageIntro";
 import PersonTile from "@/components/PersonTile";
@@ -31,15 +32,6 @@ const principles = [
   },
 ];
 
-const facts = [
-  ["Established", String(credentials.yearEstablished)],
-  ["Practice", "CPA Practice"],
-  ["Tax agent", `TPB ${credentials.tpbNumber}`],
-  ["ABN", credentials.abn],
-  ["Office", `${contact.addressLine1}, ${contact.suburb} ${contact.state}`],
-  ["Hours", `${contact.hours[0].days}, ${contact.hours[0].time}`],
-];
-
 export default function AboutPage() {
   const initials = ceo.name
     .split(" ")
@@ -51,9 +43,9 @@ export default function AboutPage() {
       <PageIntro title="Who you’ll be dealing with." tone="blue">
         <p>
           {siteConfig.name} is a CPA Practice and registered tax agency on Lasso
-          Road in {contact.suburb}. Since {credentials.yearEstablished} we&rsquo;ve
-          done the tax and accounts for local individuals, families and small
-          businesses.
+          Road in {contact.suburb}. Since {credentials.yearEstablished}{" "}
+          we&rsquo;ve done the tax and accounts for local individuals, families
+          and small businesses.
         </p>
       </PageIntro>
 
@@ -78,17 +70,15 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <dl className="border-t border-ink lg:col-span-5">
-            {facts.map(([label, value]) => (
-              <div
-                key={label}
-                className="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-ink/15 py-4"
-              >
-                <dt className="text-sm text-ink-muted">{label}</dt>
-                <dd className="font-medium tabular text-ink">{value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-primary-800 lg:col-span-5">
+            <Image
+              src="/images/services-tax-planning.png"
+              alt={`The ${siteConfig.name} office in ${contact.suburb}`}
+              fill
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
@@ -105,7 +95,7 @@ export default function AboutPage() {
           </div>
 
           <figure className="lg:col-span-8">
-            <p className="text-sm text-ink-muted">A word from our CEO</p>
+            <p className="text-sm text-ink-muted">A word from our CPA</p>
             <blockquote className="mt-4">
               <p className="font-heading text-[1.7rem] leading-snug text-ink sm:text-3xl">
                 &ldquo;{ceo.message[0]}&rdquo;

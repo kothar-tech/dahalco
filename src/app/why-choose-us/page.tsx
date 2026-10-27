@@ -63,13 +63,13 @@ export default function WhyChooseUsPage() {
               <dt className="font-heading text-xl font-semibold">
                 CPA Practice
               </dt>
-              <dd className="flex items-start gap-4 text-ink-soft">
-                <CpaPracticeMark className="h-16" />
-                <span>
-                  Our work is held to {credentials.professionalBody}&rsquo;s
-                  professional and ethical standards, on top of what the law
-                  requires of tax agents.
-                </span>
+              <dd>
+                <CpaPracticeMark className="h-14" />
+                <p className="mt-4 text-lg leading-snug text-ink">
+                  {siteConfig.name}
+                  <br />
+                  is a CPA Practice
+                </p>
               </dd>
             </div>
 

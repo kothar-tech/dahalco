@@ -96,23 +96,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Facts */}
-      <section className="border-b border-ink/15">
-        <dl className="container-page grid grid-cols-2 lg:grid-cols-4">
-          {facts.map((fact) => (
-            <div
-              key={fact.label}
-              className="flex flex-col-reverse justify-end gap-1 border-ink/15 py-8 pr-6 odd:border-r even:pl-6 lg:border-l lg:border-r-0 lg:px-8 lg:first:border-l-0 lg:first:pl-0"
-            >
-              <dt className="text-sm text-ink-muted">{fact.label}</dt>
-              <dd className="font-heading text-3xl tabular text-ink sm:text-4xl">
-                {fact.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
       {/* Services */}
       <section className="section">
         <div className="container-page grid gap-12 lg:grid-cols-12">
@@ -185,7 +168,7 @@ export default function HomePage() {
       </section>
 
       {/* What to bring */}
-      <section className="section">
+      {/* <section className="section">
         <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-4">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden lg:max-w-none">
@@ -232,7 +215,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <ClosingCta
         heading="Tax time, BAS due, or a letter from the ATO sitting on the bench?"
